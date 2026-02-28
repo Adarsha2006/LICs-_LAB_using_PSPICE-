@@ -32,16 +32,34 @@ To design and simulate a Resistive Load Common Source (CS) Amplifier using 180nm
 - Q-point selected using DC sweep
 
 ---
+# A)Circuit Diagram
+<img width="1268" height="821" alt="image" src="https://github.com/user-attachments/assets/34596f12-c655-4017-8b0b-778fea5716c7" />
 
-# A) DC Analysis
+
+
+# B) DC Analysis
 
 ### Objective:
 To determine operating region and select optimal bias point.
 
+
+#### a) DC Operating Point
+
+
+<img width="846" height="635" alt="DC OP PNT" src="https://github.com/user-attachments/assets/93cc18c4-8835-47e7-9720-1286c376e282" />
+
+
+#### b) DC Sweep
+
+
+<img width="1918" height="850" alt="dcsweep90k" src="https://github.com/user-attachments/assets/c2b135ba-ed13-469d-a492-07361e70dc23" />
+
+
+
 ### Observations:
 
-- Increasing RD increases voltage gain.
-- Steepest transfer characteristic observed for RD = 130kΩ.
+- Increasing R increases voltage gain.
+- Steepest transfer characteristic observed for R = 130kΩ.
 - Midpoint condition:
 
     Vout = VDD / 2 = 0.9 V
@@ -50,14 +68,33 @@ To determine operating region and select optimal bias point.
 
     Vin = 0.549 V
 
+  # Effect of Varying R
+
+- Increasing R increases gain.
+- Increasing R reduces bandwidth.
+- Demonstrates gain–bandwidth tradeoff.
+
+<img width="1918" height="850" alt="dcsweepvarR" src="https://github.com/user-attachments/assets/19981c97-ca8f-4314-8324-f06d2bae609b" />
+
+
+
+# Effect of Varying W
+
+- Increasing W increases drain current.
+- gm increases.
+- Gain increases.
+- Q-point shifts left in transfer curve.
+
+<img width="1918" height="847" alt="dcsweepvarW" src="https://github.com/user-attachments/assets/da82d59c-a5eb-44d5-93bb-1497dde596a0" />
+
+
 ### Inference:
 
 - MOSFET operates in saturation region at selected Q-point.
-- Proper biasing ensures maximum symmetrical output swing.
 
----
 
-# B) Transient Analysis
+
+# C) Transient Analysis
 
 ### Input Applied:
 
@@ -71,18 +108,21 @@ SIN(0.549 10m 1k)
 
 - Output waveform is inverted (180° phase shift).
 - Output DC level ≈ 0.9 V.
-- No clipping observed.
-- Voltage gain ≈ 30 V/V (approx).
+
+
+<img width="1918" height="847" alt="transient analysis" src="https://github.com/user-attachments/assets/629a7607-7053-4e9e-a9d5-981fe7ba9a09" />
+
+
+
 
 ### Inference:
 
 - CS amplifier shows proper amplification.
-- Bias point ensures symmetrical signal swing.
 - Amplifier operates in active region.
 
----
 
-# C) AC Analysis
+
+# D) AC Analysis
 
 ### AC Command Used:
 
@@ -90,47 +130,21 @@ SIN(0.549 10m 1k)
 
 ### Observations:
 
-- Midband Gain ≈ 30 dB
-- Linear Gain ≈ 31.6 V/V
 - High-frequency cutoff ≈ 1 MHz
 - Phase shift confirms inverting behavior.
 
-### Bandwidth Calculation:
 
-Since RD = 130kΩ and CL = 1pF:
+<img width="1916" height="850" alt="image" src="https://github.com/user-attachments/assets/1c06dc4f-a527-41ee-b125-6a9f7de44b35" />
 
-fH = 1 / (2π R C)
 
-fH ≈ 1 / (2π × 130k × 1pF)
-
-fH ≈ 1.2 MHz
-
-This matches simulation results.
-
----
-
-# Effect of Varying RD
-
-- Increasing RD increases gain.
-- Increasing RD reduces bandwidth.
-- Demonstrates gain–bandwidth tradeoff.
-
----
-
-# Effect of Varying W
-
-- Increasing W increases drain current.
-- gm increases.
-- Gain increases.
-- Q-point shifts left in transfer curve.
 
 ---
 
 # Overall Inferences
 
 1. Proper biasing is essential for symmetrical output swing.
-2. Gain is directly proportional to RD.
-3. Bandwidth is inversely proportional to RD.
+2. Gain is directly proportional to R.
+3. Bandwidth is inversely proportional to R.
 4. Output capacitor introduces dominant pole.
 5. CS amplifier exhibits 180° phase inversion.
 6. Gain–bandwidth tradeoff observed experimentally.
@@ -139,10 +153,8 @@ This matches simulation results.
 
 # Conclusion
 
-The Resistive Load CS Amplifier was successfully designed and simulated using 180nm CMOS technology in LTspice. The effect of varying load resistance (RD), transistor width (W), and bias voltage was studied through DC, Transient, and AC analysis. The amplifier demonstrated a midband gain of approximately 30 dB and a bandwidth of approximately 1 MHz. The experiment clearly verifies the gain–bandwidth tradeoff and the inverting nature of the Common Source amplifier.
+The Resistive Load CS Amplifier was successfully designed and simulated using 180nm CMOS technology in LTspice. The effect of varying load resistance (RD), transistor width (W), and bias voltage was studied through DC, Transient, and AC analysis. The experiment clearly verifies the gain–bandwidth tradeoff and the inverting nature of the Common Source amplifier.
 
 ---
 
-**Verified By:**  
-Dr. Yajunath Kaliyath  
-Assistant Professor, ECED, NIE Mysore
+
