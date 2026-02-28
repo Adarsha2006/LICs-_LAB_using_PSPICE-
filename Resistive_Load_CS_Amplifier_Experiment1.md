@@ -37,7 +37,7 @@ To design and simulate a Resistive Load Common Source (CS) Amplifier using 180nm
 
 
 
-# B) DC Analysis
+# B) DC Analysis and Calculations 
 
 ### Objective:
 To determine operating region and select optimal bias point.
@@ -55,18 +55,56 @@ To determine operating region and select optimal bias point.
 <img width="1918" height="850" alt="dcsweep90k" src="https://github.com/user-attachments/assets/c2b135ba-ed13-469d-a492-07361e70dc23" />
 
 
+### 1. Drain Current
 
-### Observations:
+From DC operating point:
 
-- Increasing R increases voltage gain.
-- Steepest transfer characteristic observed for R = 130kΩ.
-- Midpoint condition:
+ID = 6.84951 × 10⁻⁶ A  
+ID = 6.85 µA  
 
-    Vout = VDD / 2 = 0.9 V
+---
 
-- Corresponding input bias voltage:
+### 2. Output Voltage Calculation
 
-    Vin = 0.549 V
+Formula:
+
+Vout = VDD − (ID × RD)
+
+Substituting values:
+
+Vout = 1.8 − (6.85 × 10⁻⁶ × 130000)
+
+Vout = 1.8 − 0.8905  
+
+Vout ≈ 0.91 V  
+
+This confirms the midpoint condition (≈ 0.9 V).
+
+---
+
+### 3. Saturation Condition Check
+
+Condition for saturation:
+
+VDS > (VGS − VT)
+
+Assuming:
+
+VT ≈ 0.45 V  
+VGS = 0.549 V  
+
+VGS − VT = 0.099 V  
+
+Since:
+
+VDS ≈ 0.9 V >> 0.099 V  
+
+The MOSFET operates in saturation region.
+
+---
+
+
+
 
   # Effect of Varying R
 
@@ -86,6 +124,19 @@ To determine operating region and select optimal bias point.
 - Q-point shifts left in transfer curve.
 
 <img width="1918" height="847" alt="dcsweepvarW" src="https://github.com/user-attachments/assets/da82d59c-a5eb-44d5-93bb-1497dde596a0" />
+
+
+### Observations:
+
+- Increasing R increases voltage gain.
+- Steepest transfer characteristic observed for R = 130kΩ.
+- Midpoint condition:
+
+    Vout = VDD / 2 = 0.9 V
+
+- Corresponding input bias voltage:
+
+    Vin = 0.549 V
 
 
 ### Inference:
@@ -111,6 +162,119 @@ SIN(0.549 10m 1k)
 
 
 <img width="1918" height="847" alt="transient analysis" src="https://github.com/user-attachments/assets/629a7607-7053-4e9e-a9d5-981fe7ba9a09" />
+
+---
+
+
+
+
+## B) Transient Analysis Calculations
+
+### 1. Input Signal
+
+Vin = 0.549 + 10mV sin(2πft)  
+
+Where:
+
+f = 1 kHz  
+
+---
+
+### 2. Gain Conversion (from AC result)
+
+Midband Gain ≈ 30 dB  
+
+Linear gain:
+
+Av = 10^(30/20)
+
+Av ≈ 31.6  
+
+---
+
+### 3. Output Amplitude
+
+Input amplitude = 10 mV  
+
+Output amplitude:
+
+Vout = 31.6 × 10 mV  
+
+Vout ≈ 316 mV  
+
+Output swings around:
+
+0.9 V ± 0.316 V  
+
+Range:
+
+0.584 V to 1.216 V  
+
+No clipping observed.
+
+---
+
+## C) AC Analysis Calculations
+
+### 1. Transconductance (gm)
+
+Formula:
+
+gm = 2ID / (VGS − VT)
+
+gm = (2 × 6.85 µA) / 0.099  
+
+gm ≈ 0.000138 A/V  
+
+gm ≈ 0.138 mS  
+
+---
+
+### 2. Theoretical Voltage Gain
+
+Av = −gm × RD  
+
+Av = −(0.000138 × 130000)
+
+Av ≈ −17.9  
+
+(Theoretical value slightly differs due to model parameters and parasitic effects.)
+
+---
+
+### 3. High Frequency Cutoff
+
+Output load capacitor CL = 1 pF  
+
+Formula:
+
+fH = 1 / (2πRC)
+
+fH = 1 / (2π × 130k × 1pF)
+
+fH ≈ 1.22 MHz  
+
+This matches the simulated cutoff frequency (~1 MHz).
+
+---
+
+### 4. Bandwidth
+
+Since no coupling capacitors are used:
+
+Bandwidth ≈ fH  
+
+Bandwidth ≈ 1 MHz  
+
+---
+
+## Final Observations
+
+• Increasing RD increases gain.  
+• Increasing RD decreases bandwidth.  
+• Proper biasing ensures maximum symmetrical output swing.  
+• The amplifier exhibits 180° phase inversion.  
+• Gain–bandwidth tradeoff is verified.
 
 
 
