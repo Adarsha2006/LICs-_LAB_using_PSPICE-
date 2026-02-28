@@ -1,4 +1,4 @@
-<img width="1916" height="850" alt="image" src="https://github.com/user-attachments/assets/640fa847-8ce2-4d40-85ef-a81bf043f293" /># Experiment 1: Resistive Load CS Amplifier
+# Experiment 1: Resistive Load CS Amplifier
 
 **Simulation Tool:** LTspice  
 **Technology:** TSMC 180nm CMOS 
@@ -7,7 +7,9 @@
 
 ## Aim
 
-To design and simulate a Resistive Load Common Source (CS) Amplifier using 180nm CMOS technology.
+
+To design and simulate a Resistive Load Common-Source (CS) Amplifier using 180nm CMOS technology.
+
 
 ## Components Used
 
@@ -21,18 +23,33 @@ To design and simulate a Resistive Load Common Source (CS) Amplifier using 180nm
 | DC Offset | 0.549 V |
 | AC Amplitude | 1 V (for AC analysis) |
 
----
+
 
 ## Design Details
 
 - Channel Length (L) fixed at 180nm (technology minimum)
 - Channel Width (W) initially 540nm (W/L = 3)
-- Load capacitor of 1pF connected at output node
-- RD varied to study gain variation
+- Load capacitor of 1pF connected at output node duing AC analysis 
+- R varied to study gain variation
 - Q-point selected using DC sweep
 
----
+
+## Procedure
+
+
+### Step 1: Circuit Setup
+1. Draw NMOS transistor (180nm technology model).
+2. Set:
+   - L = 180nm
+   - W = 540nm (initial)
+3. Connect R between drain and VDD (1.8 V).
+4. Ground the source terminal.
+5. Apply DC voltage source at gate.
+
+
 # A)Circuit Diagram
+
+
 <img width="1268" height="821" alt="image" src="https://github.com/user-attachments/assets/34596f12-c655-4017-8b0b-778fea5716c7" />
 
 
@@ -43,13 +60,44 @@ To design and simulate a Resistive Load Common Source (CS) Amplifier using 180nm
 To determine operating region and select optimal bias point.
 
 
-#### a) DC Operating Point
+## a) DC Operating Point
+
+
+## Procedure
+
+
+### Step 2: Perform DC Operating Point Analysis
+1. Go to:
+   Simulate → Edit Configure Analysis → Operating Point
+2. Place the .op command on schematic.
+3. Run simulation.
+4. Note:
+   - ID
+   - VDS
+   - VGS
+5. Verify MOSFET operates in saturation region.
 
 
 <img width="846" height="635" alt="DC OP PNT" src="https://github.com/user-attachments/assets/93cc18c4-8835-47e7-9720-1286c376e282" />
 
 
-#### b) DC Sweep
+## b) DC Sweep
+
+### Step 3: Perform DC Sweep Analysis
+1. Go to:
+   Simulate → Edit Configure Analysis → DC Sweep
+2. Select:
+   - Sweep Variable: Voltage source (Vin)
+   - Start: 0 V
+   - Stop: 1.8 V
+   - Step: 0.01 V
+3. Run simulation.
+4. Plot V(out) vs Vin.
+5. Identify:
+   - Steepest curve (for different RD values).
+6. Choose midpoint:
+   Vout ≈ VDD/2 = 0.9 V
+7. Note corresponding Vin → DC Offset (0.549 V).
 
 
 <img width="1918" height="850" alt="dcsweep90k" src="https://github.com/user-attachments/assets/c2b135ba-ed13-469d-a492-07361e70dc23" />
@@ -104,13 +152,12 @@ The MOSFET operates in saturation region.
 ---
 
 
-
-
-  # Effect of Varying R
+# Effect of Varying R
 
 - Increasing R increases gain.
 - Increasing R reduces bandwidth.
 - Demonstrates gain–bandwidth tradeoff.
+  
 
 <img width="1918" height="850" alt="dcsweepvarR" src="https://github.com/user-attachments/assets/19981c97-ca8f-4314-8324-f06d2bae609b" />
 
@@ -145,9 +192,10 @@ The MOSFET operates in saturation region.
 
 
 
-# C) Transient Analysis
+# C) Transient Analysis and  Calculations
 
-### Input Applied:
+
+### Input Applied :
 
 SIN(0.549 10m 1k)
 
@@ -155,20 +203,47 @@ SIN(0.549 10m 1k)
 - Amplitude = 10 mV
 - Frequency = 1 kHz
 
-### Observations:
+  
+## Procedure 
 
-- Output waveform is inverted (180° phase shift).
-- Output DC level ≈ 0.9 V.
+### Step 4: Modify Input Source
+Set input as:
+
+SIN(0.549 10m 1k)
+
+Where:
+- 0.549 = DC offset
+- 10m = amplitude
+- 1k = frequency
+
+
+
+### Step 5: Add Transient Command
+1. Go to:
+   Simulate → Edit Configure Analysis → Transient
+2. Set stop time (e.g., 5ms).
+3. Place .tran command.
+   
+
+
+### Step 6: Run Simulation
+1. Click on output node (V(out)).
+2. Click on input node (V(in)).
+3. Split pane if required:
+   Plot Settings → Add Plot Pane
+   
+
+
+### Step 7: Observe
+1. Confirm:
+   - Output is inverted (180° phase shift).
+   - No clipping.
+2. Measure amplitude.
+3. Calculate gain = Vout/Vin.
 
 
 <img width="1918" height="847" alt="transient analysis" src="https://github.com/user-attachments/assets/629a7607-7053-4e9e-a9d5-981fe7ba9a09" />
 
----
-
-
-
-
-## B) Transient Analysis Calculations
 
 ### 1. Input Signal
 
@@ -212,9 +287,61 @@ Range:
 
 No clipping observed.
 
----
 
-## C) AC Analysis Calculations
+
+### Observations:
+
+- Output waveform is inverted (180° phase shift).
+- Output DC level ≈ 0.9 V.
+
+
+### Inference:
+
+- CS amplifier shows proper amplification.
+- Amplifier operates in active region.
+
+
+
+# D) AC Analysis and  Calculations
+
+### AC Command Used :
+
+.ac dec 100 1 1G
+
+## Procedure 
+
+### Step 8: Modify Input Source
+1. Keep DC value = 0.549 V.
+2. Set AC amplitude = 1.
+
+
+
+### Step 9: Add AC Command
+1. Go to:
+   Simulate → Edit Simulation Cmd → AC Analysis
+2. Select:
+   - Type: Decade
+   - Points/decade: 100
+   - Start: 1 Hz
+   - Stop: 1 GHz
+3. Place .ac command.
+
+
+
+### Step 10: Run Simulation
+1. Click output node.
+2. Plot:
+   dB(V(out)) for gain.
+3. Observe:
+   - Midband gain
+   - -3 dB cutoff frequency
+   - Phase response
+
+
+
+<img width="1916" height="850" alt="image" src="https://github.com/user-attachments/assets/1c06dc4f-a527-41ee-b125-6a9f7de44b35" />
+
+
 
 ### 1. Transconductance (gm)
 
@@ -268,38 +395,11 @@ Bandwidth ≈ 1 MHz
 
 ---
 
-## Final Observations
-
-• Increasing RD increases gain.  
-• Increasing RD decreases bandwidth.  
-• Proper biasing ensures maximum symmetrical output swing.  
-• The amplifier exhibits 180° phase inversion.  
-• Gain–bandwidth tradeoff is verified.
-
-
-
-
-### Inference:
-
-- CS amplifier shows proper amplification.
-- Amplifier operates in active region.
-
-
-
-# D) AC Analysis
-
-### AC Command Used:
-
-.ac dec 100 1 1G
 
 ### Observations:
 
 - High-frequency cutoff ≈ 1 MHz
 - Phase shift confirms inverting behavior.
-
-
-<img width="1916" height="850" alt="image" src="https://github.com/user-attachments/assets/1c06dc4f-a527-41ee-b125-6a9f7de44b35" />
-
 
 
 ---
@@ -317,7 +417,9 @@ Bandwidth ≈ 1 MHz
 
 # Conclusion
 
-The Resistive Load CS Amplifier was successfully designed and simulated using 180nm CMOS technology in LTspice. The effect of varying load resistance (RD), transistor width (W), and bias voltage was studied through DC, Transient, and AC analysis. The experiment clearly verifies the gain–bandwidth tradeoff and the inverting nature of the Common Source amplifier.
+-The Resistive Load CS Amplifier was successfully designed and simulated using 180nm CMOS technology in LTspice.
+-The effect of varying load resistance (RD), transistor width (W), and bias voltage was studied through DC, Transient, and AC analysis. 
+-The experiment clearly verifies the gain–bandwidth tradeoff and the inverting nature of the Common Source amplifier.
 
 ---
 
