@@ -1,4 +1,4 @@
-# Experiment 1: Resistive Load CS Amplifier
+<img width="1916" height="850" alt="image" src="https://github.com/user-attachments/assets/640fa847-8ce2-4d40-85ef-a81bf043f293" /># Experiment 1: Resistive Load CS Amplifier
 
 **Simulation Tool:** LTspice  
 **Technology:** TSMC 180nm CMOS 
@@ -14,7 +14,7 @@ To design and simulate a Resistive Load Common Source (CS) Amplifier using 180nm
 | Component | Value / Model |
 |-----------|--------------|
 | NMOS | W = 540nm , L = 180nm |
-| R | 20kΩ, 75kΩ, 130kΩ |
+| R | 20kΩ, 75kΩ, 90kΩ, 130kΩ |
 | Supply Voltage | 1.8 V |
 | Load Capacitor | 1 pF |
 | Input Source | Sinusoidal |
