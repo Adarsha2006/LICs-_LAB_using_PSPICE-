@@ -1,5 +1,3 @@
-# Experiment 2: Source Degenerated CS Amplifier Variations
-
 **Simulation Tool:** LTspice  
 **Technology:** TSMC 180nm CMOS  
 **Supply Voltage:** 1.8 V  
@@ -27,17 +25,16 @@ To design and simulate three variations of a Common-Source (CS) amplifier with s
 
 ---
 
-# 1️⃣ Resistive Source Degenerated CS Amplifier
+# Resistive Source Degenerated CS Amplifier
 
 ---
 
 ## Circuit Diagram
 
-*(Insert screenshot here)*
 
-```
-[ INSERT CIRCUIT DIAGRAM IMAGE – Resistive Degeneration ]
-```
+<img width="1037" height="767" alt="cktdgm1" src="https://github.com/user-attachments/assets/9df03e4a-5ea0-4c25-ab5a-629ca02bd01a" />
+
+
 
 ---
 
@@ -63,6 +60,9 @@ To design and simulate three variations of a Common-Source (CS) amplifier with s
 3. Note ID, Vout, VGS, VDS.
 4. Verify M1 operates in saturation.
 
+
+<img width="850" height="633" alt="dcop1" src="https://github.com/user-attachments/assets/082a6050-d347-4813-9130-e4903f05efab" />
+
 ---
 
 ### Step 2: DC Sweep
@@ -76,7 +76,18 @@ To design and simulate three variations of a Common-Source (CS) amplifier with s
 
 Vout ≈ VDD / 2 = 0.9V
 
-Selected DC Offset ≈ 0.58 V
+Selected DC Offset ≈ 0.549 V
+#### Variable R
+
+
+<img width="1917" height="850" alt="dcsweepvarR1" src="https://github.com/user-attachments/assets/e3927d0d-f07a-458f-87cb-44c6c6e831bd" />
+
+#### Variable W
+
+
+<img width="1915" height="850" alt="dcsweepvarW1" src="https://github.com/user-attachments/assets/cd4f7f88-b5f6-41c4-b7ce-f4f78067d53c" />
+
+
 
 ---
 
@@ -101,8 +112,10 @@ P ≈ 6.3 µW
 Input:
 
 ```
-SIN(0.58 10m 1k)
+SIN(0.549 10m 1k)
 ```
+<img width="1918" height="880" alt="TA1" src="https://github.com/user-attachments/assets/df34d0c5-777c-4603-a7e5-8480a580012b" />
+
 
 Observations:
 
@@ -117,6 +130,8 @@ Observations:
 ```
 .ac dec 10 100 1G
 ```
+<img width="1908" height="847" alt="AC1" src="https://github.com/user-attachments/assets/b88c7b6a-74b3-4d5a-84c1-89a1f5c30dd0" />
+
 
 Midband Gain ≈ 18–20 dB  
 
@@ -137,17 +152,15 @@ Bandwidth moderate.
 
 ---
 
-# 2️⃣ MOS Source Degenerated CS (Fixed VBN)
+# MOS Source Degenerated CS (Fixed VBN)
 
 ---
 
 ## Circuit Diagram
 
-*(Insert screenshot here)*
+<img width="1170" height="750" alt="cktdgm2" src="https://github.com/user-attachments/assets/10b06689-452e-44a9-b6dc-88c01a53e968" />
 
-```
-[ INSERT CIRCUIT DIAGRAM IMAGE – MOS with VBN ]
-```
+
 
 ---
 
@@ -168,6 +181,9 @@ Bandwidth moderate.
 
 ## Operating Principle
 
+<img width="847" height="635" alt="dcop2" src="https://github.com/user-attachments/assets/d3dbc71e-c4ab-47dd-a2e7-6779b829f68c" />
+
+
 M3 operates in linear region and behaves as:
 
 Ron = 1 / (µn Cox (W/L)(VGS − VT))
@@ -177,6 +193,9 @@ It replaces Rs with a voltage-controlled resistor.
 ---
 
 ## DC Results
+
+<img width="1908" height="838" alt="dcsweep2" src="https://github.com/user-attachments/assets/cd274d12-d357-42f3-9c81-8347b3d4d79c" />
+
 
 ID ≈ 3.8 µA  
 
@@ -193,6 +212,9 @@ Vout ≈ 0.9 – 1.0 V
 
 ## Transient
 
+<img width="1918" height="848" alt="TA2" src="https://github.com/user-attachments/assets/43745fde-784b-4782-aaf6-4ead5d854b29" />
+
+
 ```
 SIN(0.75 10m 1k)
 ```
@@ -206,6 +228,9 @@ Observations:
 ---
 
 ## AC Analysis
+
+<img width="1917" height="849" alt="AC2" src="https://github.com/user-attachments/assets/93adbabd-1b93-4287-b4fc-0c8ca063b8a7" />
+
 
 Midband Gain ≈ 14–16 dB  
 
@@ -226,17 +251,17 @@ Bandwidth higher than Rs case.
 
 ---
 
-# 3️⃣ Gate-Tied MOS Degenerated CS (Self Bias)
+# Gate-Tied MOS Degenerated CS (Self Bias)
 
 ---
 
 ## Circuit Diagram
 
-*(Insert screenshot here)*
 
-```
-[ INSERT CIRCUIT DIAGRAM IMAGE – Gate Tied ]
-```
+<img width="1112" height="728" alt="cktdgm3" src="https://github.com/user-attachments/assets/32b1dfe8-bc3f-460b-8d1e-c3bcbff795f7" />
+
+
+
 
 ---
 
@@ -250,11 +275,18 @@ Bandwidth higher than Rs case.
 
 ## DC Behavior
 
+<img width="848" height="632" alt="dcop3" src="https://github.com/user-attachments/assets/80e7e54d-92b6-4867-a4c7-2e4ccccb216d" />
+
+
 For Vi ≈ 1.21V:
 
 Vout ≈ 0.87 V  
 
 ID ≈ 3 – 4 µA  
+
+
+<img width="1918" height="847" alt="dcsweep3" src="https://github.com/user-attachments/assets/78049f89-22ba-4f69-9833-64320a6f6894" />
+
 
 Power:
 
@@ -270,6 +302,9 @@ P ≈ 6 – 7 µW
 SIN(1.21 10m 1k)
 ```
 
+<img width="1918" height="848" alt="TA3" src="https://github.com/user-attachments/assets/805b6958-4b9e-49bf-a4f5-99aa3587e683" />
+
+
 Observations:
 
 - Lowest gain
@@ -279,6 +314,9 @@ Observations:
 ---
 
 ## AC Results
+
+<img width="1918" height="847" alt="AC3" src="https://github.com/user-attachments/assets/82821c85-78b4-4ee0-99de-1423cf2e92fe" />
+
 
 Midband Gain ≈ 10–12 dB  
 
