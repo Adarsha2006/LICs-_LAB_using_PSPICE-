@@ -1,3 +1,5 @@
+# Experiment 2: Source Degenerated CS Amplifier Variations
+
 **Simulation Tool:** LTspice  
 **Technology:** TSMC 180nm CMOS  
 **Supply Voltage:** 1.8 V  
@@ -77,12 +79,12 @@ To design and simulate three variations of a Common-Source (CS) amplifier with s
 Vout ≈ VDD / 2 = 0.9V
 
 Selected DC Offset ≈ 0.549 V
-#### Variable R
+#### Varying Resistor,  R :
 
 
 <img width="1917" height="850" alt="dcsweepvarR1" src="https://github.com/user-attachments/assets/e3927d0d-f07a-458f-87cb-44c6c6e831bd" />
 
-#### Variable W
+#### Varying Width, W :
 
 
 <img width="1915" height="850" alt="dcsweepvarW1" src="https://github.com/user-attachments/assets/cd4f7f88-b5f6-41c4-b7ce-f4f78067d53c" />
